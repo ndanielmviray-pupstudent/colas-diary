@@ -3,38 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cola’s Diary</title>
+  <title>Colas Diary</title>
   <style>
     body {
-      background-color: #f6effa; /* light lavender */
+      background-color: #0e0b12;
       font-family: 'Segoe UI', sans-serif;
-      color: #4a2c2a; /* soft brown text */
+      color: #e6dbff;
       text-align: center;
       margin: 0;
       padding: 0;
-      transition: background-color 0.5s ease;
+      opacity: 0;
+      animation: fadeInBody 1.2s ease forwards;
+    }
+
+    @keyframes fadeInBody {
+      to { opacity: 1; }
     }
 
     header {
-      background-color: #cbb4e5; /* lavender header */
+      background: linear-gradient(90deg, #2d0b5a, #4b1a7f);
       padding: 20px;
-      border-bottom: 3px solid #bda0d9;
+      border-bottom: 3px solid #704fb0;
+      box-shadow: 0 4px 10px rgba(80, 52, 28, 0.4);
     }
 
     header h1 {
       font-family: 'Brush Script MT', cursive;
-      font-size: 48px;
-      color: #5b3a29; /* deep brown title */
+      font-size: 50px;
+      color: #d8c3ff;
       margin: 0;
     }
 
     nav {
-      background-color: #e9dbf5; /* pale lavender */
-      padding: 10px;
+      background-color: #1a1520;
+      padding: 12px;
+      border-bottom: 2px solid #5e3f92;
     }
 
     nav a {
-      color: #5b3a29; /* brown links */
+      color: #c9b2ff;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
@@ -43,29 +50,57 @@
     }
 
     nav a:hover {
-      color: #7c5ea5; /* soft purple hover */
+      color: #d1b17f;
+    }
+
+    section {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .entry, .about {
-      background: #ffffff;
+      background: #18121e;
       border-radius: 20px;
       margin: 40px auto;
       padding: 30px;
       width: 80%;
       max-width: 700px;
-      box-shadow: 0 4px 10px rgba(91, 58, 41, 0.2); /* brown shadow */
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .show {
-      opacity: 1;
-      transform: translateY(0);
+      box-shadow: 0 4px 15px rgba(84, 60, 38, 0.3);
     }
 
     .entry h2 {
-      color: #7c5ea5; /* lavender heading */
+      color: #b08cff;
+    }
+
+    .entry p {
+      color: #e6dbff;
+    }
+
+    /* --- Violet Glow Animation for Picture --- */
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 15px rgba(160, 120, 255, 0.6),
+                    0 0 25px rgba(112, 79, 176, 0.4),
+                    0 0 35px rgba(80, 52, 28, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 25px rgba(200, 160, 255, 0.8),
+                    0 0 45px rgba(112, 79, 176, 0.5),
+                    0 0 55px rgba(88, 62, 42, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 15px rgba(160, 120, 255, 0.6),
+                    0 0 25px rgba(112, 79, 176, 0.4),
+                    0 0 35px rgba(80, 52, 28, 0.2);
+      }
     }
 
     .about img {
@@ -74,29 +109,60 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 20px;
-      border: 3px solid #cbb4e5;
+      border: 3px solid #704fb0;
+      animation: glow 3s infinite ease-in-out;
     }
 
     .about h2 {
-      color: #5b3a29;
+      color: #d1b17f;
       margin-bottom: 10px;
     }
 
     .about p {
       font-size: 18px;
-      color: #4a2c2a;
+      color: #e6dbff;
+      line-height: 1.6;
+      display: inline-block;
+      border-right: 2px solid #c4a3ff;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(60, end) forwards, blink 0.7s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .contact {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #c4a3ff;
+    }
+
+    footer {
+      background-color: #1a1520;
+      padding: 15px;
+      color: #a88cff;
+      font-size: 14px;
+      border-top: 2px solid #5e3f92;
+      box-shadow: 0 -4px 10px rgba(84, 60, 38, 0.3);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Cola’s Diary</h1>
+    <h1>Colas Diary</h1>
   </header>
 
   <nav>
     <a onclick="showSection('home')">Home</a>
     <a onclick="showSection('about')">About</a>
-    <a href="#">Gallery</a>
   </nav>
 
   <section id="home" class="entry show">
@@ -105,32 +171,35 @@
   </section>
 
   <section id="about" class="about">
-    <img src="your-photo.jpg" alt="Nicole Daniel Viray">
+    <img src="FormalPictureIDPicture.jpeg" alt="Nicole Daniel Viray">
     <h2>Nicole Daniel Viray</h2>
-    <p>4th Year IT Student at Polytechnic University of the Philippines - San Juan Campus</p>
+    <p id="aboutText">Working Student Since 2021 | 4th Year IT Student | Skilled in Accounting Support & Data Encoding</p>
+    <div class="contact">
+      <strong>Contact:</strong> nicoledanilemviray@iskolarngbayan.pup.edu.ph
+    </div>
   </section>
 
+  <footer>
+    <p>© 2025 Colas Diary | Designed with 💜 by Nicole Daniel Viray</p>
+  </footer>
+
   <script>
-    function showSection(section) {
-      const home = document.getElementById('home');
-      const about = document.getElementById('about');
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => {
+        sec.classList.remove('show');
+      });
 
-      // Hide both first
-      home.classList.remove('show');
-      about.classList.remove('show');
+      const selected = document.getElementById(sectionId);
+      selected.classList.add('show');
 
-      // Then show selected section with fade animation
-      setTimeout(() => {
-        if (section === 'home') {
-          home.style.display = 'block';
-          about.style.display = 'none';
-          home.classList.add('show');
-        } else if (section === 'about') {
-          about.style.display = 'block';
-          home.style.display = 'none';
-          about.classList.add('show');
-        }
-      }, 300);
+      // Restart typing animation only when switching to About
+      if (sectionId === 'about') {
+        const aboutText = document.getElementById('aboutText');
+        aboutText.style.animation = 'none';
+        void aboutText.offsetWidth; // re-trigger animation
+        aboutText.style.animation = 'typing 4s steps(60, end) forwards, blink 0.7s step-end infinite';
+      }
     }
   </script>
 </body>
